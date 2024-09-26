@@ -1,0 +1,7 @@
+/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp-web-api/obj/Debug/net6.0/depsmvp-web-api.csproj.AssemblyReference.cache
+/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp-web-api/obj/Debug/net6.0/depsmvp-web-api.GeneratedMSBuildEditorConfig.editorconfig
+/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp-web-api/obj/Debug/net6.0/depsmvp-web-api.AssemblyInfoInputs.cache
+/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp-web-api/obj/Debug/net6.0/depsmvp-web-api.AssemblyInfo.cs
+/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp-web-api/obj/Debug/net6.0/depsmvp-web-api.csproj.CoreCompileInputs.cache
+/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp-web-api/obj/Debug/net6.0/depsmvp-web-api.MvcApplicationPartsAssemblyInfo.cs
+/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp-web-api/obj/Debug/net6.0/depsmvp-web-api.MvcApplicationPartsAssemblyInfo.cache
