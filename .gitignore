@@ -1,0 +1,7 @@
+/depsmvp-web-api.sln
+
+# Ignore Rider project-specific files
+*.rider
+
+# Ignore obj directory (build artifacts)
+**/obj/
