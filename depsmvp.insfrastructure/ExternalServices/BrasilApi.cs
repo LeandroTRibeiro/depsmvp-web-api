@@ -32,6 +32,7 @@ public class BrasilApi : IBrasilApi
             }
         }
 
+        Console.WriteLine("estou fazendo uma requisicao");
         return response;
     }
 }

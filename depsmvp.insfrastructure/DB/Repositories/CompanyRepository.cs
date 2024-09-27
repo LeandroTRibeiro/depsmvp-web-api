@@ -1,3 +1,4 @@
+using DepsMvp.Application.DTOs;
 using DepsMvp.Application.Services;
 using depsmvp.domain.Entities.Company;
 using Microsoft.EntityFrameworkCore;
@@ -29,5 +30,16 @@ public class CompanyRepository : ICompanyRepository
         
         await _dbContext.Companies.AddAsync(company);
         await _dbContext.SaveChangesAsync();
+    }
+
+    public async Task<Company> GetCompanyByCnpjAsync(string cnpj)
+    {
+        var company = await _dbContext.Companies
+            .FirstOrDefaultAsync(
+                c => c.Cnpj!.Equals(cnpj) && 
+                     c.SearchDate.Date.Date.Equals(DateTime.UtcNow.Date
+                     ));
+        
+        return company!;
     }
 }
