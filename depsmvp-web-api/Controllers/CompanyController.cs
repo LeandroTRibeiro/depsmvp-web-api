@@ -1,5 +1,6 @@
 using System.Net;
 using DepsMvp.Application.Services;
+using depsmvp.application.Validators;
 using Microsoft.AspNetCore.Mvc;
 
 namespace depsmvp_web_api.Controllers;
@@ -18,6 +19,10 @@ public class CompanyController : ControllerBase
     [HttpGet("cnpj/{cnpj}")]
     public async Task<IActionResult> GetCompanyByCnpj(string cnpj)
     {
+        if (!CnpjValidator.IsValidCnpj(cnpj))
+        {
+            return BadRequest(new { message = "Invalid CNPJ" });
+        }
         var response = await _companyService.GetCompany(cnpj);
 
         if (response.HttpCode == HttpStatusCode.OK)
