@@ -12,7 +12,13 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\" />
+        <ProjectReference Include="..\depsmvp.application\depsmvp.application.csproj" />
+        <ProjectReference Include="..\depsmvp.insfrastructure\depsmvp.insfrastructure.csproj" />
+        
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
     </ItemGroup>
-
+    
 </Project>
