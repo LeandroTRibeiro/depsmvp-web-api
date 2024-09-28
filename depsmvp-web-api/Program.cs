@@ -1,8 +1,29 @@
+using depsmvp.application.Mappings;
+using DepsMvp.Application.Services;
+using depsmvp.insfrastructure.DB;
+using depsmvp.insfrastructure.DB.Repositories;
+using depsmvp.insfrastructure.ExternalServices;
+using depsmvp.insfrastructure.InternalServices;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+builder.Services.AddScoped<IConsultRepository, ConsultRepository>();
+builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+builder.Services.AddScoped<ICompanyConsultRepository, CompanyConsultRepository>();
+builder.Services.AddScoped<ICompanyService, CompanyServices>();
+builder.Services.AddScoped<IBrasilApi, BrasilApi>();
+
+builder.Services.AddAutoMapper(typeof(CompanyMapping));
 
 var app = builder.Build();
 
