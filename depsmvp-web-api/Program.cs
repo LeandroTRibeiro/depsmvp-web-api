@@ -17,8 +17,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddScoped<IConsultRepository, ConsultRepository>();
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+builder.Services.AddScoped<ICompanyConsultRepository, CompanyConsultRepository>();
 builder.Services.AddScoped<ICompanyService, CompanyServices>();
+builder.Services.AddScoped<IConsultService, ConsultService>();
 builder.Services.AddScoped<IBrasilApi, BrasilApi>();
 
 builder.Services.AddAutoMapper(typeof(CompanyMapping));
