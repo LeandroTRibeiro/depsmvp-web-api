@@ -99,7 +99,7 @@ public class Company
     public string? DescricaoPorte { get; set; }
 
     [JsonPropertyName("opcao_pelo_simples")]
-    public bool OpcaoPeloSimples { get; set; }
+    public bool? OpcaoPeloSimples { get; set; }
 
     [JsonPropertyName("data_opcao_pelo_simples")]
     public string? DataOpcaoPeloSimples { get; set; }
@@ -108,7 +108,7 @@ public class Company
     public string? DataExclusaoDoSimples { get; set; }
 
     [JsonPropertyName("opcao_pelo_mei")]
-    public bool OpcaoPeloMei { get; set; }
+    public bool? OpcaoPeloMei { get; set; }
 
     [JsonPropertyName("situacao_especial")]
     public string? SituacaoEspecial { get; set; }
