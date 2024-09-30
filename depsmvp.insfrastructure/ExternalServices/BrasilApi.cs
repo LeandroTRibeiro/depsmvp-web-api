@@ -28,7 +28,7 @@ public class BrasilApi : IBrasilApi
             else
             {
                 response.HttpCode = responseBrasilApi.StatusCode;
-                response.ErrorResponse = JsonSerializer.Deserialize<ExpandoObject>(contetResponse);
+                response.ErrorResponse = JsonSerializer.Deserialize<ErrorDetails>(contetResponse);
             }
         }
 
