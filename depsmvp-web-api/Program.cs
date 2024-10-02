@@ -1,3 +1,4 @@
+using depsmvp.application.Interfaces.Services;
 using depsmvp.application.Mappings;
 using DepsMvp.Application.Services;
 using depsmvp.insfrastructure.DB;
@@ -19,12 +20,19 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<IConsultRepository, ConsultRepository>();
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+builder.Services.AddScoped<IPepsRepository, PepsRepository>();
+builder.Services.AddScoped<IPepsConsultRepository, PepsConsultRepository>();
 builder.Services.AddScoped<ICompanyConsultRepository, CompanyConsultRepository>();
-builder.Services.AddScoped<ICompanyService, CompanyServices>();
-builder.Services.AddScoped<IConsultService, ConsultService>();
-builder.Services.AddScoped<IBrasilApi, BrasilApi>();
+
+builder.Services.AddScoped<IConsultServices, ConsultServices>();
+builder.Services.AddScoped<ICompanyServices, CompanyServices>();
+builder.Services.AddScoped<IPepsServices, PepsServiceses>();
+
+builder.Services.AddHttpClient<IBrasilApi, BrasilApi>();
+builder.Services.AddHttpClient<IPortalDaTrasparenciaApi, PortalDaTrasparenciaApi>();
 
 builder.Services.AddAutoMapper(typeof(CompanyMapping));
+builder.Services.AddAutoMapper(typeof(PepsMapping));
 
 var app = builder.Build();
 
