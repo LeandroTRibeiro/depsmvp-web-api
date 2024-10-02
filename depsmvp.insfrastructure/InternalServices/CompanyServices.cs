@@ -7,7 +7,7 @@ using depsmvp.domain.Entities.Company;
 
 namespace depsmvp.insfrastructure.InternalServices;
 
-public class CompanyServices : ICompanyService
+public class CompanyServices : ICompanyServices
 {
     private readonly IMapper _mapper;
     private readonly IBrasilApi _brasilApi;
@@ -56,12 +56,14 @@ public class CompanyServices : ICompanyService
             if (newCompany.HttpCode == HttpStatusCode.OK && newCompany.ReturnData != null)
             {
                 
+                await _companyRepository.AddCompanyAsync(newCompany.ReturnData);
+                
                 companyConsult.ConsultId = consult.Id;
                 companyConsult.CompanyId = newCompany.ReturnData.Id;
                 companyConsult.AssociatedDate = DateTime.UtcNow;
                 
                 await _companyConsultRepository.AddAsync(companyConsult);
-                await _companyRepository.AddCompanyAsync(newCompany.ReturnData);
+
             }
             
             return _mapper.Map<ResponseGeneric<CompanyResponse>>(newCompany);

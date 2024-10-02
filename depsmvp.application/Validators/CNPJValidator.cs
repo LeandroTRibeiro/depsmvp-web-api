@@ -1,6 +1,6 @@
 namespace depsmvp.application.Validators;
 
-public class CnpjValidator
+public class CNPJValidator
 {
     public static bool IsValidCnpj(string cnpj)
     {

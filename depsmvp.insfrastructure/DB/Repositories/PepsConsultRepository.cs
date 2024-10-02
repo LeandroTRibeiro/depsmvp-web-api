@@ -3,18 +3,19 @@ using depsmvp.domain.Entities;
 
 namespace depsmvp.insfrastructure.DB.Repositories;
 
-public class CompanyConsultRepository : ICompanyConsultRepository
+public class PepsConsultRepository : IPepsConsultRepository
 {
     private readonly ApplicationDbContext _dbContext;
 
-    public CompanyConsultRepository(ApplicationDbContext dbContext)
+    public PepsConsultRepository(ApplicationDbContext dbContext)
     {
         _dbContext = dbContext;
     }
 
-    public async Task AddAsync(CompanyConsult companyConsult)
+    public async Task AddRangeAsync(List<PepsConsult> pepConsults)
     {
-        await _dbContext.CompanyConsults.AddAsync(companyConsult);
+        await _dbContext.PepConsults.AddRangeAsync(pepConsults);
         await _dbContext.SaveChangesAsync();
     }
+    
 }

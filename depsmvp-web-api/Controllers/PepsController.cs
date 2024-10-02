@@ -1,44 +1,42 @@
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using DepsMvp.Application.DTOs;
-using DepsMvp.Application.Services;
+using depsmvp.application.Interfaces.Services;
 using depsmvp.application.Validators;
-using depsmvp.domain.Entities;
-using depsmvp.insfrastructure.InternalServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace depsmvp_web_api.Controllers;
 
 [ApiController]
-[Route("api/v1/company")]
-public class CompanyController : ControllerBase
+[Route("api/v1/peps")]
+public class PepsController : ControllerBase
 {
-    public readonly ICompanyServices CompanyServices;
+    public readonly IPepsServices PepsServices;
 
-    public CompanyController(ICompanyServices companyServices)
+    public PepsController(IPepsServices pepsServices)
     {
-        CompanyServices = companyServices;
+        PepsServices = pepsServices;
     }
 
-    [HttpGet("cnpj/")]
-    [ProducesResponseType(typeof(CompanyResponse), (int)HttpStatusCode.OK)]              
+    [HttpGet("peps/")]
+    [ProducesResponseType(typeof(List<PepsResponse>), (int)HttpStatusCode.OK)]              
     [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.BadRequest)]         
     [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.Unauthorized)]       
     [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.Forbidden)]          
     [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.NotFound)]           
     [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.InternalServerError)]
-    public async Task<IActionResult> GetCompanyByCnpj(
-        [FromQuery][Required]string cnpj
-        )
+    public async Task<IActionResult> GetPepsByCpfAsync(
+        [FromQuery] [Required] string cpf
+    )
     {
-        if (!CNPJValidator.IsValidCnpj(cnpj))
+        if (!CPFValidator.IsValidCpf(cpf))
         {
-            return BadRequest(new { message = "Invalid CNPJ" });
+            return BadRequest(new { message = "Invalid CPF." });
         }
 
         try
         {
-            var response = await CompanyServices.GetCompany(cnpj);
+            var response = await PepsServices.GetPeps(cpf);
 
             if (response.HttpCode == HttpStatusCode.OK)
             {
@@ -48,11 +46,10 @@ public class CompanyController : ControllerBase
             {
                 return StatusCode((int)response.HttpCode, response.ErrorResponse);
             }
-
         }
         catch (Exception exception)
         {
-            return StatusCode((int)HttpStatusCode.InternalServerError, 
+            return StatusCode((int)HttpStatusCode.InternalServerError,
                 new
                 {
                     message = "An error occurred while processing your request.",
@@ -60,5 +57,4 @@ public class CompanyController : ControllerBase
                 });
         }
     }
-    
 }

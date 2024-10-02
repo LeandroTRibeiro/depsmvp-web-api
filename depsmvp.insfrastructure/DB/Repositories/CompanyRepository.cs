@@ -35,6 +35,8 @@ public class CompanyRepository : ICompanyRepository
     public async Task<Company> GetCompanyByCnpjAsync(string cnpj)
     {
         var company = await _dbContext.Companies
+            .Include(c => c.CnaesSecundarios)
+            .Include(c => c.Qsa)
             .FirstOrDefaultAsync(
                 c => c.Cnpj!.Equals(cnpj) && 
                      c.SearchDate.Date.Date.Equals(DateTime.UtcNow.Date

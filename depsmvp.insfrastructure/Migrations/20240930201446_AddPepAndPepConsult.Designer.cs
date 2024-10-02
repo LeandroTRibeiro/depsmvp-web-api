@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using depsmvp.insfrastructure.DB;
@@ -11,9 +12,10 @@ using depsmvp.insfrastructure.DB;
 namespace depsmvp.insfrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240930201446_AddPepAndPepConsult")]
+    partial class AddPepAndPepConsult
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -260,6 +262,70 @@ namespace depsmvp.insfrastructure.Migrations
                     b.ToTable("Consults");
                 });
 
+            modelBuilder.Entity("depsmvp.domain.Entities.Pep", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CodOrgao")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Cpf")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("DescricaoFuncao")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DtFimCarencia")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DtFimExercicio")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DtInicioExercicio")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NivelFuncao")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NomeOrgao")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SiglaFuncao")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Peps");
+                });
+
+            modelBuilder.Entity("depsmvp.domain.Entities.PepConsult", b =>
+                {
+                    b.Property<int>("PepId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ConsultId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("AssociatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("PepId", "ConsultId");
+
+                    b.HasIndex("ConsultId");
+
+                    b.ToTable("PepConsults");
+                });
+
             modelBuilder.Entity("depsmvp.domain.Entities.User", b =>
                 {
                     b.Property<int?>("Id")
@@ -338,6 +404,25 @@ namespace depsmvp.insfrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("depsmvp.domain.Entities.PepConsult", b =>
+                {
+                    b.HasOne("depsmvp.domain.Entities.Consult", "Consult")
+                        .WithMany()
+                        .HasForeignKey("ConsultId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("depsmvp.domain.Entities.Pep", "Pep")
+                        .WithMany()
+                        .HasForeignKey("PepId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Consult");
+
+                    b.Navigation("Pep");
                 });
 
             modelBuilder.Entity("depsmvp.domain.Entities.Company.Company", b =>

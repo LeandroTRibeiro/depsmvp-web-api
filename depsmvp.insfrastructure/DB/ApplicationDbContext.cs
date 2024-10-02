@@ -6,6 +6,8 @@ namespace depsmvp.insfrastructure.DB;
 
 public class ApplicationDbContext : DbContext
 {
+    public DbSet<Pep> Peps { get; set; } = null!;
+    public DbSet<PepsConsult> PepConsults { get; set; } = null!;
     public DbSet<User> Users { get; set; } = null!;
     public DbSet<Consult> Consults { get; set; } = null!;
     public DbSet<CompanyConsult> CompanyConsults { get; set; } = null!;
@@ -17,6 +19,9 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<PepsConsult>()
+            .HasKey(pc => new { pc.PepId, pc.ConsultId });
+        
         modelBuilder.Entity<CompanyConsult>()
             .HasKey(cc => new { cc.CompanyId, cc.ConsultId });
         

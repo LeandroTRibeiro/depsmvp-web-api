@@ -1,22 +1,30 @@
-using System.Dynamic;
 using System.Text.Json;
 using DepsMvp.Application.DTOs;
 using DepsMvp.Application.Services;
 using depsmvp.domain.Entities.Company;
+using Microsoft.Extensions.Configuration;
+using System.Net.Http;
 
-namespace depsmvp.insfrastructure.ExternalServices;
-
-public class BrasilApi : IBrasilApi
+namespace depsmvp.insfrastructure.ExternalServices
 {
-    public async Task<ResponseGeneric<Company>> GetCompany(string cnpj)
+    public class BrasilApi : IBrasilApi
     {
-        var request = new HttpRequestMessage(HttpMethod.Get, $"https://brasilapi.com.br/api/cnpj/v1/{cnpj}");
-        
-        var response = new ResponseGeneric<Company>();
-        
-        using (var client = new HttpClient())
+        private readonly HttpClient _httpClient;
+        private readonly string _brasilApiUrl;
+
+        public BrasilApi(HttpClient httpClient, IConfiguration configuration)
         {
-            var responseBrasilApi = await client.SendAsync(request);
+            _httpClient = httpClient;
+            _brasilApiUrl = configuration["ExternalServices:BrasilApi:Url"];
+        }
+
+        public async Task<ResponseGeneric<Company>> GetCompany(string cnpj)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{_brasilApiUrl}{cnpj}");
+
+            var response = new ResponseGeneric<Company>();
+
+            var responseBrasilApi = await _httpClient.SendAsync(request);
             var contetResponse = await responseBrasilApi.Content.ReadAsStringAsync();
             var objResponse = JsonSerializer.Deserialize<Company>(contetResponse);
 
@@ -28,11 +36,10 @@ public class BrasilApi : IBrasilApi
             else
             {
                 response.HttpCode = responseBrasilApi.StatusCode;
-                response.ErrorResponse = JsonSerializer.Deserialize<ExpandoObject>(contetResponse);
+                response.ErrorResponse = JsonSerializer.Deserialize<ErrorDetails>(contetResponse);
             }
-        }
 
-        Console.WriteLine("estou fazendo uma requisicao");
-        return response;
+            return response;
+        }
     }
 }
