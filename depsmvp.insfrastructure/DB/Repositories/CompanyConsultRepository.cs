@@ -12,7 +12,6 @@ public class CompanyConsultRepository : ICompanyConsultRepository
         _dbContext = dbContext;
     }
 
-
     public async Task AddAsync(CompanyConsult companyConsult)
     {
         await _dbContext.CompanyConsults.AddAsync(companyConsult);
