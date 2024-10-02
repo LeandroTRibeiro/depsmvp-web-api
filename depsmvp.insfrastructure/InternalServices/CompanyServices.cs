@@ -63,11 +63,11 @@ public class CompanyServices : ICompanyServices
                 companyConsult.AssociatedDate = DateTime.UtcNow;
                 
                 await _companyConsultRepository.AddAsync(companyConsult);
+
             }
             
             return _mapper.Map<ResponseGeneric<CompanyResponse>>(newCompany);
         }
-        
         
         companyConsult.ConsultId = consult.Id;
         companyConsult.CompanyId = company.Id;

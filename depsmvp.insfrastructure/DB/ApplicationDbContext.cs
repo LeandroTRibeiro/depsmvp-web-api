@@ -8,7 +8,6 @@ public class ApplicationDbContext : DbContext
 {
     public DbSet<Pep> Peps { get; set; } = null!;
     public DbSet<PepsConsult> PepConsults { get; set; } = null!;
-    
     public DbSet<User> Users { get; set; } = null!;
     public DbSet<Consult> Consults { get; set; } = null!;
     public DbSet<CompanyConsult> CompanyConsults { get; set; } = null!;
