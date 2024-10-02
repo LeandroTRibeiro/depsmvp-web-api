@@ -4,11 +4,11 @@ using depsmvp.domain.Entities;
 
 namespace depsmvp.insfrastructure.InternalServices;
 
-public class ConsultServiceses : IConsultServices
+public class ConsultServices : IConsultServices
 {
     private readonly IConsultRepository _consultRepository;
 
-    public ConsultServiceses(IConsultRepository consultRepository)
+    public ConsultServices(IConsultRepository consultRepository)
     {
         _consultRepository = consultRepository;
     }

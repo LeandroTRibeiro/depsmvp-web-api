@@ -7,7 +7,7 @@ using depsmvp.domain.Entities.Company;
 
 namespace depsmvp.insfrastructure.InternalServices;
 
-public class CompanyServiceses : ICompanyServices
+public class CompanyServices : ICompanyServices
 {
     private readonly IMapper _mapper;
     private readonly IBrasilApi _brasilApi;
@@ -15,7 +15,7 @@ public class CompanyServiceses : ICompanyServices
     private readonly IConsultRepository _consultRepository;
     private readonly ICompanyConsultRepository _companyConsultRepository;
 
-    public CompanyServiceses(
+    public CompanyServices(
         IMapper mapper, 
         IBrasilApi brasilApi, 
         ICompanyRepository companyRepository, 
