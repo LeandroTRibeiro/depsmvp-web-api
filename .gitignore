@@ -6,3 +6,5 @@
 
 # Ignore obj directory (build artifacts)
 **/obj/
+
+appsettings.json
