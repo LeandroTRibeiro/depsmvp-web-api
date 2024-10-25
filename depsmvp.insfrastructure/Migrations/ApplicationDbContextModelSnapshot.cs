@@ -220,20 +220,20 @@ namespace depsmvp.insfrastructure.Migrations
                     b.Property<int>("CompanyId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ConsultId")
+                    b.Property<int>("ConsultationId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("AssociatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.HasKey("CompanyId", "ConsultId");
+                    b.HasKey("CompanyId", "ConsultationId");
 
-                    b.HasIndex("ConsultId");
+                    b.HasIndex("ConsultationId");
 
                     b.ToTable("CompanyConsults");
                 });
 
-            modelBuilder.Entity("depsmvp.domain.Entities.Consult", b =>
+            modelBuilder.Entity("depsmvp.domain.Entities.Consultation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -241,14 +241,20 @@ namespace depsmvp.insfrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Document")
+                    b.Property<string>("ConsultationCode")
                         .HasColumnType("text");
 
-                    b.Property<string>("Query")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("SearchtDate")
+                    b.Property<DateTime>("ConsultationDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("ConsultationDateReference")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int?>("ConsultationInterval")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ConsultationType")
+                        .HasColumnType("text");
 
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
@@ -257,7 +263,71 @@ namespace depsmvp.insfrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Consults");
+                    b.ToTable("Consultations");
+                });
+
+            modelBuilder.Entity("depsmvp.domain.Entities.Pep", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CodOrgao")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Cpf")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DescricaoFuncao")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DtFimCarencia")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DtFimExercicio")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DtInicioExercicio")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NivelFuncao")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NomeOrgao")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("SearchDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("SiglaFuncao")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Peps");
+                });
+
+            modelBuilder.Entity("depsmvp.domain.Entities.PepsConsult", b =>
+                {
+                    b.Property<int>("PepId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ConsultationId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("AssociatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("PepId", "ConsultationId");
+
+                    b.HasIndex("ConsultationId");
+
+                    b.ToTable("PepConsults");
                 });
 
             modelBuilder.Entity("depsmvp.domain.Entities.User", b =>
@@ -318,26 +388,45 @@ namespace depsmvp.insfrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("depsmvp.domain.Entities.Consult", "Consult")
+                    b.HasOne("depsmvp.domain.Entities.Consultation", "Consultation")
                         .WithMany()
-                        .HasForeignKey("ConsultId")
+                        .HasForeignKey("ConsultationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Company");
 
-                    b.Navigation("Consult");
+                    b.Navigation("Consultation");
                 });
 
-            modelBuilder.Entity("depsmvp.domain.Entities.Consult", b =>
+            modelBuilder.Entity("depsmvp.domain.Entities.Consultation", b =>
                 {
                     b.HasOne("depsmvp.domain.Entities.User", "User")
-                        .WithMany("Consults")
+                        .WithMany("Consultations")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("depsmvp.domain.Entities.PepsConsult", b =>
+                {
+                    b.HasOne("depsmvp.domain.Entities.Consultation", "Consultation")
+                        .WithMany()
+                        .HasForeignKey("ConsultationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("depsmvp.domain.Entities.Pep", "Pep")
+                        .WithMany()
+                        .HasForeignKey("PepId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Consultation");
+
+                    b.Navigation("Pep");
                 });
 
             modelBuilder.Entity("depsmvp.domain.Entities.Company.Company", b =>
@@ -349,7 +438,7 @@ namespace depsmvp.insfrastructure.Migrations
 
             modelBuilder.Entity("depsmvp.domain.Entities.User", b =>
                 {
-                    b.Navigation("Consults");
+                    b.Navigation("Consultations");
                 });
 #pragma warning restore 612, 618
         }

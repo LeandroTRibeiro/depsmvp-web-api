@@ -12,38 +12,50 @@ public class CompanyServices : ICompanyServices
     private readonly IMapper _mapper;
     private readonly IBrasilApi _brasilApi;
     private readonly ICompanyRepository _companyRepository;
-    private readonly IConsultRepository _consultRepository;
+    private readonly IConsultRepository _consultationRepository;
+    private readonly IUserRepository _userRepository;
     private readonly ICompanyConsultRepository _companyConsultRepository;
 
     public CompanyServices(
         IMapper mapper, 
         IBrasilApi brasilApi, 
         ICompanyRepository companyRepository, 
-        IConsultRepository consultRepository,
+        IConsultRepository consultationRepository,
+        IUserRepository userRepository,
         ICompanyConsultRepository companyConsultRepository
         )
     {
         _mapper = mapper;
         _brasilApi = brasilApi;
         _companyRepository = companyRepository;
-        _consultRepository = consultRepository;
+        _consultationRepository = consultationRepository;
+        _userRepository = userRepository;
         _companyConsultRepository = companyConsultRepository;
     }
     
     
-    public async Task<ResponseGeneric<CompanyResponse>> GetCompany(string cnpj)
+    public async Task<ResponseGeneric<CompanyResponse>> GetCompany(
+            string cnpj,
+            string referenceDate,
+            int interval
+        )
     {
         const int userId = 1;
+        var user = await _userRepository.GetUserById(1);
+        DateTime parsedDate = DateTime.ParseExact(referenceDate, "dd/MM/yyyy", null);
 
-        var consult = new Consult
+    
+        var consultation = new Consultation
         {
-            Document = cnpj,
-            Query = cnpj,
-            SearchtDate = DateTime.UtcNow,
-            UserId = userId
+            User = user,
+            ConsultationDate = DateTime.UtcNow,
+            ConsultationType = "CNPJ",
+            ConsultationCode = cnpj,
+            ConsultationDateReference = parsedDate.ToUniversalTime(),
+            ConsultationInterval = interval,
         };
         
-        await _consultRepository.AddConsultAsync(consult);
+        await _consultationRepository.AddConsultAsync(consultation);
 
         CompanyConsult companyConsult = new CompanyConsult();
         
@@ -58,7 +70,7 @@ public class CompanyServices : ICompanyServices
                 
                 await _companyRepository.AddCompanyAsync(newCompany.ReturnData);
                 
-                companyConsult.ConsultId = consult.Id;
+                companyConsult.ConsultationId = consultation.Id;
                 companyConsult.CompanyId = newCompany.ReturnData.Id;
                 companyConsult.AssociatedDate = DateTime.UtcNow;
                 
@@ -69,7 +81,7 @@ public class CompanyServices : ICompanyServices
             return _mapper.Map<ResponseGeneric<CompanyResponse>>(newCompany);
         }
         
-        companyConsult.ConsultId = consult.Id;
+        companyConsult.ConsultationId = consultation.Id;
         companyConsult.CompanyId = company.Id;
         companyConsult.AssociatedDate = DateTime.UtcNow;
         

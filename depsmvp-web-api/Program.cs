@@ -18,15 +18,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddScoped<IConsultRepository, ConsultRepository>();
+builder.Services.AddScoped<IConsultRepository, ConsultationRepository>();
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 builder.Services.AddScoped<IPepsRepository, PepsRepository>();
 builder.Services.AddScoped<IPepsConsultRepository, PepsConsultRepository>();
 builder.Services.AddScoped<ICompanyConsultRepository, CompanyConsultRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-builder.Services.AddScoped<IConsultServices, ConsultServices>();
+builder.Services.AddScoped<IConsultServices, ConsultationServices>();
 builder.Services.AddScoped<ICompanyServices, CompanyServices>();
-builder.Services.AddScoped<IPepsServices, PepsServiceses>();
+builder.Services.AddScoped<IPepsServices, PepsServices>();
 
 builder.Services.AddHttpClient<IBrasilApi, BrasilApi>();
 builder.Services.AddHttpClient<IPortalDaTrasparenciaApi, PortalDaTrasparenciaApi>();

@@ -49,7 +49,11 @@ public class PepsRepository : IPepsRepository
     
     public async Task<List<Pep>> GetAllPepsByCpfAsync(string cpf)
     {
-        var peps = await _dbContext.Peps.Where(p => p.Cpf!.Equals(cpf)).ToListAsync();
+        var peps = await _dbContext.Peps
+            .Where(p => 
+                p.Cpf!.Equals(cpf) &&
+                p.SearchDate.Date.Date.Equals(DateTime.UtcNow.Date))
+            .ToListAsync();
         
         return peps;
     }

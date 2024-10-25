@@ -14,5 +14,5 @@ public class User
     
     public string? CreatedAt { get; set; }
     
-    public ICollection<Consult>? Consults { get; set; }
+    public ICollection<Consultation>? Consultations { get; set; }
 }

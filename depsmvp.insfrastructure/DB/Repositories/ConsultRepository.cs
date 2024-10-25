@@ -4,30 +4,30 @@ using Microsoft.EntityFrameworkCore;
 
 namespace depsmvp.insfrastructure.DB.Repositories;
 
-public class ConsultRepository : IConsultRepository
+public class ConsultationRepository : IConsultRepository
 {
     private readonly ApplicationDbContext _context;
 
-    public ConsultRepository(ApplicationDbContext context)
+    public ConsultationRepository(ApplicationDbContext context)
     {
         _context = context;
     }
 
-    public async Task AddConsultAsync(Consult consult)
+    public async Task AddConsultAsync(Consultation consultation)
     {
-        await _context.Consults.AddAsync(consult);
+        await _context.Consultations.AddAsync(consultation);
         await _context.SaveChangesAsync();
     }
     
     public async Task<int> GetTotalConsultsCountAsync()
     {
-        return await _context.Consults.CountAsync();
+        return await _context.Consultations.CountAsync();
         
     }
 
-    public async Task<List<Consult>> GetAllConsultsAsync(int? limit = null, int pageNumber = 1, int pageSize = 10)
+    public async Task<List<Consultation>> GetAllConsultsAsync(int? limit = null, int pageNumber = 1, int pageSize = 10)
     {
-        var query = _context.Consults.AsQueryable();
+        var query = _context.Consultations.AsQueryable();
 
         if (pageNumber > 0 && pageSize > 0)
         {

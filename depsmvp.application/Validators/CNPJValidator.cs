@@ -1,8 +1,8 @@
 namespace depsmvp.application.Validators;
 
-public class CNPJValidator
+public static class CNPJValidator
 {
-    public static bool IsValidCnpj(string cnpj)
+    public static bool IsValidCnpj(this string cnpj)
     {
         cnpj = cnpj.Trim().Replace(".", "").Replace("-", "").Replace("/", "");
 

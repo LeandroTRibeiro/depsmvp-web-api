@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2yctXvCYun4OvV3H9mnZ2NZXi6KFjKFgLHssvdUzWYLnovfd4Xqu6QOJqYjPI40MeIgxXs4IoVr5axPqmE4QMw==",
+  "dgSpecHash": "JaUSWcPE2/srogiAnp9X6B3DKIJE0DX4JSGoj/FJ2F+N4TScHE0xGVu+TV/s0y1LGvr3Kp9k+wupKp+MKPmo7g==",
   "success": true,
-  "projectFilePath": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp-web-api/depsmvp-web-api.csproj",
+  "projectFilePath": "/home/leandro/depsmvp-web-api/depsmvp-web-api/depsmvp-web-api.csproj",
   "expectedPackageFiles": [
     "/home/leandro/.nuget/packages/automapper/11.0.1/automapper.11.0.1.nupkg.sha512",
     "/home/leandro/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/11.0.0/automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",

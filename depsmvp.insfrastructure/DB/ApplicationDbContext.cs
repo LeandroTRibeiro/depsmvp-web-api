@@ -9,7 +9,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Pep> Peps { get; set; } = null!;
     public DbSet<PepsConsult> PepConsults { get; set; } = null!;
     public DbSet<User> Users { get; set; } = null!;
-    public DbSet<Consult> Consults { get; set; } = null!;
+    public DbSet<Consultation> Consultations { get; set; } = null!;
     public DbSet<CompanyConsult> CompanyConsults { get; set; } = null!;
     public DbSet<Company> Companies { get; set; } = null!;
     public DbSet<CnaesSecundario> CnaesSecundarios { get; set; } = null!;
@@ -20,14 +20,14 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<PepsConsult>()
-            .HasKey(pc => new { pc.PepId, pc.ConsultId });
+            .HasKey(pc => new { pc.PepId, pc.ConsultationId });
         
         modelBuilder.Entity<CompanyConsult>()
-            .HasKey(cc => new { cc.CompanyId, cc.ConsultId });
+            .HasKey(cc => new { cc.CompanyId, cc.ConsultationId });
         
-        modelBuilder.Entity<Consult>()
+        modelBuilder.Entity<Consultation>()
             .HasOne(c => c.User)
-            .WithMany(u => u.Consults)
+            .WithMany(u => u.Consultations)
             .HasForeignKey(c => c.UserId);
         
         modelBuilder.Entity<CnaesSecundario>()

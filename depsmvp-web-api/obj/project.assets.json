@@ -1399,11 +1399,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp-web-api/depsmvp-web-api.csproj",
+      "projectUniqueName": "/home/leandro/depsmvp-web-api/depsmvp-web-api/depsmvp-web-api.csproj",
       "projectName": "depsmvp-web-api",
-      "projectPath": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp-web-api/depsmvp-web-api.csproj",
+      "projectPath": "/home/leandro/depsmvp-web-api/depsmvp-web-api/depsmvp-web-api.csproj",
       "packagesPath": "/home/leandro/.nuget/packages/",
-      "outputPath": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp-web-api/obj/",
+      "outputPath": "/home/leandro/depsmvp-web-api/depsmvp-web-api/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/leandro/.nuget/NuGet/NuGet.Config"
@@ -1418,11 +1418,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.application/depsmvp.application.csproj": {
-              "projectPath": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.application/depsmvp.application.csproj"
+            "/home/leandro/depsmvp-web-api/depsmvp.application/depsmvp.application.csproj": {
+              "projectPath": "/home/leandro/depsmvp-web-api/depsmvp.application/depsmvp.application.csproj"
             },
-            "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.insfrastructure/depsmvp.insfrastructure.csproj": {
-              "projectPath": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.insfrastructure/depsmvp.insfrastructure.csproj"
+            "/home/leandro/depsmvp-web-api/depsmvp.insfrastructure/depsmvp.insfrastructure.csproj": {
+              "projectPath": "/home/leandro/depsmvp-web-api/depsmvp.insfrastructure/depsmvp.insfrastructure.csproj"
             }
           }
         }
@@ -1467,7 +1467,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/leandro/.dotnet/sdk/6.0.418/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/home/leandro/.dotnet/sdk/6.0.425/RuntimeIdentifierGraph.json"
       }
     }
   }

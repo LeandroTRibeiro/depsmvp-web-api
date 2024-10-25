@@ -8,18 +8,18 @@ using Microsoft.AspNetCore.Mvc;
 namespace depsmvp_web_api.Controllers;
 
 [ApiController]
-[Route("api/v1/consult")]
-public class ConsultController : ControllerBase
+[Route("api/v1/consultation")]
+public class ConsultationController : ControllerBase
 {
-    public readonly IConsultServices ConsultServices;
+    public readonly IConsultServices ConsultationServices;
 
-    public ConsultController(IConsultServices consultServices)
+    public ConsultationController(IConsultServices consultationServices)
     {
-        ConsultServices = consultServices;
+        ConsultationServices = consultationServices;
     }
     
-    [HttpGet("consults/")]
-    [ProducesResponseType(typeof(PagedResponse<List<Consult>>), (int)HttpStatusCode.OK)]              
+    [HttpGet("consultations/")]
+    [ProducesResponseType(typeof(PagedResponse<List<Consultation>>), (int)HttpStatusCode.OK)]              
     [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.BadRequest)]       
     [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.Unauthorized)]     
     [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.Forbidden)]        
@@ -48,9 +48,9 @@ public class ConsultController : ControllerBase
                 });
             }
         
-            var consults = await ConsultServices.GetAllConsultsAsync(limit, pageNumber, pageSize);
+            var consultations = await ConsultationServices.GetAllConsultsAsync(limit, pageNumber, pageSize);
 
-            return Ok(consults);
+            return Ok(consultations);
         }
         catch (Exception exception)
         {

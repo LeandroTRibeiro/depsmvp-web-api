@@ -1,8 +1,8 @@
 namespace depsmvp.application.Validators;
 
-public class CPFValidator
+public static class CPFValidator
 {
-    public static bool IsValidCpf(string cpf)
+    public static bool IsValidCpf(this string cpf)
     {
         cpf = cpf.Trim().Replace(".", "").Replace("-", "");
 

@@ -28,17 +28,24 @@ public class CompanyController : ControllerBase
     [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.NotFound)]           
     [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.InternalServerError)]
     public async Task<IActionResult> GetCompanyByCnpj(
-        [FromQuery][Required]string cnpj
+            [FromQuery][Required]string cnpj,
+            [FromQuery] [Required] string referenceDate,
+            [FromQuery] [Required] int interval
         )
     {
-        if (!CNPJValidator.IsValidCnpj(cnpj))
+        if (!cnpj.IsValidCnpj())
         {
             return BadRequest(new { message = "Invalid CNPJ" });
+        }
+        
+        if (!DateTime.TryParseExact(referenceDate, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime parsedDate))
+        {
+            return BadRequest(new { message = "Invalid reference date format. Expected format is dd/MM/yyyy." });
         }
 
         try
         {
-            var response = await CompanyServices.GetCompany(cnpj);
+            var response = await CompanyServices.GetCompany(cnpj, referenceDate, interval);
 
             if (response.HttpCode == HttpStatusCode.OK)
             {

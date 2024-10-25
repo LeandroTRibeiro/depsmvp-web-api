@@ -4,23 +4,23 @@ using depsmvp.domain.Entities;
 
 namespace depsmvp.insfrastructure.InternalServices;
 
-public class ConsultServices : IConsultServices
+public class ConsultationServices : IConsultServices
 {
-    private readonly IConsultRepository _consultRepository;
+    private readonly IConsultRepository _consultationRepository;
 
-    public ConsultServices(IConsultRepository consultRepository)
+    public ConsultationServices(IConsultRepository consultationRepository)
     {
-        _consultRepository = consultRepository;
+        _consultationRepository = consultationRepository;
     }
     
-    public async Task<PagedResponse<List<Consult>>> GetAllConsultsAsync(int? limit, int pageNumber, int pageSize)
+    public async Task<PagedResponse<List<Consultation>>> GetAllConsultsAsync(int? limit, int pageNumber, int pageSize)
     {
-        var totalItems = await _consultRepository.GetTotalConsultsCountAsync();
-        var consults = await _consultRepository.GetAllConsultsAsync(limit, pageNumber, pageSize);
+        var totalItems = await _consultationRepository.GetTotalConsultsCountAsync();
+        var consultations = await _consultationRepository.GetAllConsultsAsync(limit, pageNumber, pageSize);
 
-        return new PagedResponse<List<Consult>>()
+        return new PagedResponse<List<Consultation>>()
         {
-            Data = consults,
+            Data = consultations,
             PageNumber = pageNumber,
             PageSize = pageSize,
             TotalItems = totalItems,

@@ -26,17 +26,24 @@ public class PepsController : ControllerBase
     [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.NotFound)]           
     [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.InternalServerError)]
     public async Task<IActionResult> GetPepsByCpfAsync(
-        [FromQuery] [Required] string cpf
+        [FromQuery] [Required] string cpf,
+        [FromQuery] [Required] string referenceDate,
+        [FromQuery] [Required] int interval
     )
     {
-        if (!CPFValidator.IsValidCpf(cpf))
+        if (!cpf.IsValidCpf())
         {
             return BadRequest(new { message = "Invalid CPF." });
+        }
+        
+        if (!DateTime.TryParseExact(referenceDate, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime parsedDate))
+        {
+            return BadRequest(new { message = "Invalid reference date format. Expected format is dd/MM/yyyy." });
         }
 
         try
         {
-            var response = await PepsServices.GetPeps(cpf);
+            var response = await PepsServices.GetPeps(cpf, referenceDate, interval);
 
             if (response.HttpCode == HttpStatusCode.OK)
             {

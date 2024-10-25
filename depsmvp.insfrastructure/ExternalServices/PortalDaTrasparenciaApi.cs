@@ -18,14 +18,17 @@ public class PortalDaTrasparenciaApi : IPortalDaTrasparenciaApi
         _configuration = configuration; 
     }
     
-    public async Task<ResponseGeneric<List<Pep>>> GetPep(string cpf)
+    public async Task<ResponseGeneric<List<Pep>>> GetPep(string cpf, DateTime referenceDate, int interval)
     {
         var baseUrl = _configuration["ExternalServices:PortalDaTrasparenciaApi:BaseUrl"];
         var endpoint = _configuration["ExternalServices:PortalDaTrasparenciaApi:EndPoints:Peps"];
         var apiKeyName = _configuration["ExternalServices:PortalDaTrasparenciaApi:Header:Authorization:Name"];
         var apiKeyValue = _configuration["ExternalServices:PortalDaTrasparenciaApi:Header:Authorization:Value"];
-
-        var requestUrl = $"{baseUrl}{endpoint}{cpf}";
+        
+        var startUntil = referenceDate.ToString("dd/MM/yyyy");
+        var startFrom = referenceDate.AddDays(-interval).ToString("dd/MM/yyyy");
+        
+        var requestUrl = $"{baseUrl}{endpoint}{cpf}&dataInicioExercicioDe={startFrom}&dataInicioExercicioAte={startUntil}";
         
         var request = new HttpRequestMessage(HttpMethod.Get, requestUrl);
         request.Headers.Add(apiKeyName, apiKeyValue);

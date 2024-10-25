@@ -4,5 +4,5 @@ namespace DepsMvp.Application.Services;
 
 public interface ICompanyServices
 {
-    Task<ResponseGeneric<CompanyResponse>> GetCompany(string cnpj);
+    Task<ResponseGeneric<CompanyResponse>> GetCompany(string cnpj, string referenceDate, int interval);
 }

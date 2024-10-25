@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp-web-api/depsmvp-web-api.csproj": {}
+    "/home/leandro/depsmvp-web-api/depsmvp-web-api/depsmvp-web-api.csproj": {}
   },
   "projects": {
-    "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp-web-api/depsmvp-web-api.csproj": {
+    "/home/leandro/depsmvp-web-api/depsmvp-web-api/depsmvp-web-api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp-web-api/depsmvp-web-api.csproj",
+        "projectUniqueName": "/home/leandro/depsmvp-web-api/depsmvp-web-api/depsmvp-web-api.csproj",
         "projectName": "depsmvp-web-api",
-        "projectPath": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp-web-api/depsmvp-web-api.csproj",
+        "projectPath": "/home/leandro/depsmvp-web-api/depsmvp-web-api/depsmvp-web-api.csproj",
         "packagesPath": "/home/leandro/.nuget/packages/",
-        "outputPath": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp-web-api/obj/",
+        "outputPath": "/home/leandro/depsmvp-web-api/depsmvp-web-api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/leandro/.nuget/NuGet/NuGet.Config"
@@ -26,11 +26,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.application/depsmvp.application.csproj": {
-                "projectPath": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.application/depsmvp.application.csproj"
+              "/home/leandro/depsmvp-web-api/depsmvp.application/depsmvp.application.csproj": {
+                "projectPath": "/home/leandro/depsmvp-web-api/depsmvp.application/depsmvp.application.csproj"
               },
-              "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.insfrastructure/depsmvp.insfrastructure.csproj": {
-                "projectPath": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.insfrastructure/depsmvp.insfrastructure.csproj"
+              "/home/leandro/depsmvp-web-api/depsmvp.insfrastructure/depsmvp.insfrastructure.csproj": {
+                "projectPath": "/home/leandro/depsmvp-web-api/depsmvp.insfrastructure/depsmvp.insfrastructure.csproj"
               }
             }
           }
@@ -75,18 +75,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/leandro/.dotnet/sdk/6.0.418/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/home/leandro/.dotnet/sdk/6.0.425/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.application/depsmvp.application.csproj": {
+    "/home/leandro/depsmvp-web-api/depsmvp.application/depsmvp.application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.application/depsmvp.application.csproj",
+        "projectUniqueName": "/home/leandro/depsmvp-web-api/depsmvp.application/depsmvp.application.csproj",
         "projectName": "depsmvp.application",
-        "projectPath": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.application/depsmvp.application.csproj",
+        "projectPath": "/home/leandro/depsmvp-web-api/depsmvp.application/depsmvp.application.csproj",
         "packagesPath": "/home/leandro/.nuget/packages/",
-        "outputPath": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.application/obj/",
+        "outputPath": "/home/leandro/depsmvp-web-api/depsmvp.application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/leandro/.nuget/NuGet/NuGet.Config"
@@ -101,8 +101,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.domain/depsmvp.domain.csproj": {
-                "projectPath": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.domain/depsmvp.domain.csproj"
+              "/home/leandro/depsmvp-web-api/depsmvp.domain/depsmvp.domain.csproj": {
+                "projectPath": "/home/leandro/depsmvp-web-api/depsmvp.domain/depsmvp.domain.csproj"
               }
             }
           }
@@ -138,18 +138,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/leandro/.dotnet/sdk/6.0.418/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/home/leandro/.dotnet/sdk/6.0.425/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.domain/depsmvp.domain.csproj": {
+    "/home/leandro/depsmvp-web-api/depsmvp.domain/depsmvp.domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.domain/depsmvp.domain.csproj",
+        "projectUniqueName": "/home/leandro/depsmvp-web-api/depsmvp.domain/depsmvp.domain.csproj",
         "projectName": "depsmvp.domain",
-        "projectPath": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.domain/depsmvp.domain.csproj",
+        "projectPath": "/home/leandro/depsmvp-web-api/depsmvp.domain/depsmvp.domain.csproj",
         "packagesPath": "/home/leandro/.nuget/packages/",
-        "outputPath": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.domain/obj/",
+        "outputPath": "/home/leandro/depsmvp-web-api/depsmvp.domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/leandro/.nuget/NuGet/NuGet.Config"
@@ -191,18 +191,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/leandro/.dotnet/sdk/6.0.418/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/home/leandro/.dotnet/sdk/6.0.425/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.insfrastructure/depsmvp.insfrastructure.csproj": {
+    "/home/leandro/depsmvp-web-api/depsmvp.insfrastructure/depsmvp.insfrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.insfrastructure/depsmvp.insfrastructure.csproj",
+        "projectUniqueName": "/home/leandro/depsmvp-web-api/depsmvp.insfrastructure/depsmvp.insfrastructure.csproj",
         "projectName": "depsmvp.insfrastructure",
-        "projectPath": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.insfrastructure/depsmvp.insfrastructure.csproj",
+        "projectPath": "/home/leandro/depsmvp-web-api/depsmvp.insfrastructure/depsmvp.insfrastructure.csproj",
         "packagesPath": "/home/leandro/.nuget/packages/",
-        "outputPath": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.insfrastructure/obj/",
+        "outputPath": "/home/leandro/depsmvp-web-api/depsmvp.insfrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/leandro/.nuget/NuGet/NuGet.Config"
@@ -217,8 +217,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.application/depsmvp.application.csproj": {
-                "projectPath": "/home/leandro/LeandroTRibeiro/depsmvp-web-api/depsmvp.application/depsmvp.application.csproj"
+              "/home/leandro/depsmvp-web-api/depsmvp.application/depsmvp.application.csproj": {
+                "projectPath": "/home/leandro/depsmvp-web-api/depsmvp.application/depsmvp.application.csproj"
               }
             }
           }
@@ -272,7 +272,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/leandro/.dotnet/sdk/6.0.418/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/home/leandro/.dotnet/sdk/6.0.425/RuntimeIdentifierGraph.json"
         }
       }
     }
