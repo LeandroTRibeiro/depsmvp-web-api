@@ -34,14 +34,14 @@ public class CompanyServices : ICompanyServices
     }
     
     
-    public async Task<ResponseGeneric<CompanyResponse>> GetCompany(
+    public async Task<ResponseGeneric<CompanyResponse>> GetCompanyAsync(
             string cnpj,
             string referenceDate,
             int interval
         )
     {
         const int userId = 1;
-        var user = await _userRepository.GetUserById(1);
+        var user = await _userRepository.GetUserByIdAsync(1);
         DateTime parsedDate = DateTime.ParseExact(referenceDate, "dd/MM/yyyy", null);
 
     
@@ -63,7 +63,7 @@ public class CompanyServices : ICompanyServices
 
         if (company == null)
         {
-            var newCompany = await _brasilApi.GetCompany(cnpj);
+            var newCompany = await _brasilApi.GetCompanyAsync(cnpj);
 
             if (newCompany.HttpCode == HttpStatusCode.OK && newCompany.ReturnData != null)
             {
@@ -94,5 +94,18 @@ public class CompanyServices : ICompanyServices
                     ReturnData = company
                 }
             );
+    }
+
+    public async Task<ResponseGeneric<CompanyResponse>> GetCompanyByConsultationtIdAsync(int consultationId)
+    {
+        var company = await _companyConsultRepository.GetCompanyByConsultationtIdAsync(consultationId);
+        
+        return _mapper.Map<ResponseGeneric<CompanyResponse>>(
+            new ResponseGeneric<Company>()
+            {
+                HttpCode = HttpStatusCode.OK,
+                ReturnData = company
+            }
+        );
     }
 }

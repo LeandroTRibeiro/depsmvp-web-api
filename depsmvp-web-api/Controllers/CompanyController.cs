@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace depsmvp_web_api.Controllers;
 
 [ApiController]
-[Route("api/v1/company")]
+[Route("api/v1/companies")]
 public class CompanyController : ControllerBase
 {
     public readonly ICompanyServices CompanyServices;
@@ -27,7 +27,7 @@ public class CompanyController : ControllerBase
     [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.Forbidden)]          
     [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.NotFound)]           
     [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.InternalServerError)]
-    public async Task<IActionResult> GetCompanyByCnpj(
+    public async Task<IActionResult> GetCompanyByCnpjAsync(
             [FromQuery][Required]string cnpj,
             [FromQuery] [Required] string referenceDate,
             [FromQuery] [Required] int interval
@@ -45,7 +45,7 @@ public class CompanyController : ControllerBase
 
         try
         {
-            var response = await CompanyServices.GetCompany(cnpj, referenceDate, interval);
+            var response = await CompanyServices.GetCompanyAsync(cnpj, referenceDate, interval);
 
             if (response.HttpCode == HttpStatusCode.OK)
             {
@@ -67,5 +67,42 @@ public class CompanyController : ControllerBase
                 });
         }
     }
-    
+
+
+    [HttpGet("company/")]
+    [ProducesResponseType(typeof(CompanyResponse), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(ErrorDetails),
+        (int)HttpStatusCode.Unauthorized)]
+    [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.Forbidden)]
+    [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.NotFound)]
+    [ProducesResponseType(typeof(ErrorDetails),
+        (int)HttpStatusCode.InternalServerError)]
+    public async Task<IActionResult> GetCompanyByConsultationIdAsync(
+        [FromQuery] [Required] int consultationId)
+    {
+        try
+        {
+            var response = await CompanyServices.GetCompanyByConsultationtIdAsync(consultationId);
+
+            if (response.HttpCode == HttpStatusCode.OK)
+            {
+                return Ok(response.ReturnData);
+            }
+            else
+            {
+                return StatusCode((int)response.HttpCode, response.ErrorResponse);
+            }
+
+        }
+        catch (Exception exception)
+        {
+            return StatusCode((int)HttpStatusCode.InternalServerError, 
+                new
+                {
+                    message = "An error occurred while processing your request.",
+                    details = exception.Message
+                });
+        }
+    }
 }
