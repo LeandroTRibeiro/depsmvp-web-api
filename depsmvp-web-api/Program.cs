@@ -9,6 +9,15 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        build => 
+            build.AllowAnyOrigin()
+                 .AllowAnyHeader()
+                 .AllowAnyMethod());
+});
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -36,6 +45,8 @@ builder.Services.AddAutoMapper(typeof(CompanyMapping));
 builder.Services.AddAutoMapper(typeof(PepsMapping));
 
 var app = builder.Build();
+
+app.UseCors("AllowSpecificOrigin");
 
 if (app.Environment.IsDevelopment())
 {
