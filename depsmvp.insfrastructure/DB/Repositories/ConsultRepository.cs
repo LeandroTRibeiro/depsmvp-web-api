@@ -27,7 +27,7 @@ public class ConsultationRepository : IConsultRepository
 
     public async Task<List<Consultation>> GetAllConsultsAsync(int? limit = null, int pageNumber = 1, int pageSize = 10)
     {
-        var query = _context.Consultations.AsQueryable();
+        var query = _context.Consultations.Include(c => c.User).AsQueryable();
 
         if (pageNumber > 0 && pageSize > 0)
         {
