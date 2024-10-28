@@ -13,7 +13,7 @@ public class PepsServices : IPepsServices
     private readonly IMapper _mapper;
     private readonly IPortalDaTrasparenciaApi _portalDaTrasparenciaApi;
     private readonly IPepsRepository _pepsRepository;
-    private readonly IConsultRepository _ConsultationRepository;
+    private readonly IConsultRepository _consultationRepository;
     private readonly IUserRepository _userRepository;
     private readonly IPepsConsultRepository _pepsConsultRepository;
     private readonly ApplicationDbContext _dbContext;
@@ -21,7 +21,7 @@ public class PepsServices : IPepsServices
     public PepsServices(
         IMapper mapper, 
         IPortalDaTrasparenciaApi portalDaTrasparenciaApi,
-        IConsultRepository ConsultationRepository,
+        IConsultRepository consultationRepository,
         IPepsRepository pepsRepository,
         IPepsConsultRepository pepsConsultRepository,
         IUserRepository userRepository,
@@ -31,23 +31,23 @@ public class PepsServices : IPepsServices
         _mapper = mapper;
         _portalDaTrasparenciaApi = portalDaTrasparenciaApi;
         _pepsRepository = pepsRepository;
-        _ConsultationRepository = ConsultationRepository;
+        _consultationRepository = consultationRepository;
         _pepsConsultRepository = pepsConsultRepository;
         _userRepository = userRepository;
         _dbContext = dbContext;
     }
     
-    public async Task<ResponseGeneric<List<PepsResponse>>> GetPeps(
+    public async Task<ResponseGeneric<List<PepsResponse>>> GetPepsByCpfAsync(
             string cpf, 
             string referenceDate, 
             int interval
         )
     {
         const int userId = 1;
-        var user = await _userRepository.GetUserById(1);
+        var user = await _userRepository.GetUserByIdAsync(1);
         DateTime parsedDate = DateTime.ParseExact(referenceDate, "dd/MM/yyyy", null);
     
-        var Consultation = new Consultation
+        var consultation = new Consultation
         {
             User = user,
             ConsultationDate = DateTime.UtcNow,
@@ -57,7 +57,7 @@ public class PepsServices : IPepsServices
             ConsultationInterval = interval,
         };
         
-        await _ConsultationRepository.AddConsultAsync(Consultation);
+        await _consultationRepository.AddConsultAsync(consultation);
         
         var peps = await _pepsRepository.GetAllPepsByCpfAsync(cpf);
         
@@ -65,7 +65,7 @@ public class PepsServices : IPepsServices
         
         if (!peps.Any())
         {
-            var newPeps = await _portalDaTrasparenciaApi.GetPep(cpf, parsedDate, interval);
+            var newPeps = await _portalDaTrasparenciaApi.GetPepAsync(cpf, parsedDate, interval);
             
             if (newPeps.HttpCode == HttpStatusCode.OK && newPeps.ReturnData != null)
             {
@@ -77,7 +77,7 @@ public class PepsServices : IPepsServices
                 {
                     var pepConsult = new PepsConsult()
                     {
-                        ConsultationId = Consultation.Id,
+                        ConsultationId = consultation.Id,
                         PepId = newPep.Id,
                         AssociatedDate = DateTime.UtcNow
                     };
@@ -96,7 +96,7 @@ public class PepsServices : IPepsServices
         {
             var pepConsult = new PepsConsult()
             {
-                ConsultationId = Consultation.Id,
+                ConsultationId = consultation.Id,
                 PepId = pep.Id,
                 AssociatedDate = DateTime.UtcNow
             };
@@ -113,5 +113,19 @@ public class PepsServices : IPepsServices
                     ReturnData = peps
                 }
             );
+    }
+
+    public async Task<ResponseGeneric<List<PepsResponse>>> GetPepsByConsultationtIdAsync(int consultationId)
+    {
+        var peps =
+            await _pepsConsultRepository.GetPepsByConsultationtIdAsync(consultationId);
+        
+        return _mapper.Map<ResponseGeneric<List<PepsResponse>>>(
+            new ResponseGeneric<List<Pep>>()
+            {
+                HttpCode = HttpStatusCode.OK,
+                ReturnData = peps
+            }
+        );
     }
 }
