@@ -4,5 +4,5 @@ namespace DepsMvp.Application.Services;
 
 public interface IUserRepository
 {
-    Task<User> GetUserById(int id);
+    Task<User> GetUserByIdAsync(int id);
 }

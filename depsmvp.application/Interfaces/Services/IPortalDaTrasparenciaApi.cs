@@ -5,5 +5,5 @@ namespace depsmvp.application.Interfaces.Services;
 
 public interface IPortalDaTrasparenciaApi
 {
-    Task<ResponseGeneric<List<Pep>>> GetPep(string cpf, DateTime referenceDate, int interval);
+    Task<ResponseGeneric<List<Pep>>> GetPepAsync(string cpf, DateTime referenceDate, int interval);
 }

@@ -18,7 +18,7 @@ public class PortalDaTrasparenciaApi : IPortalDaTrasparenciaApi
         _configuration = configuration; 
     }
     
-    public async Task<ResponseGeneric<List<Pep>>> GetPep(string cpf, DateTime referenceDate, int interval)
+    public async Task<ResponseGeneric<List<Pep>>> GetPepAsync(string cpf, DateTime referenceDate, int interval)
     {
         var baseUrl = _configuration["ExternalServices:PortalDaTrasparenciaApi:BaseUrl"];
         var endpoint = _configuration["ExternalServices:PortalDaTrasparenciaApi:EndPoints:Peps"];

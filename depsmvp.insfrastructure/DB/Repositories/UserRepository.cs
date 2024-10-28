@@ -12,7 +12,7 @@ public class UserRepository : IUserRepository
         _context = context;
     }
     
-    public async Task<User> GetUserById(int id)
+    public async Task<User> GetUserByIdAsync(int id)
     {
         var user = await _context.Users.FindAsync(id);
         

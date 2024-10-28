@@ -5,5 +5,5 @@ namespace DepsMvp.Application.Services;
 
 public interface IBrasilApi
 {
-    Task<ResponseGeneric<Company>> GetCompany(string cnpj);
+    Task<ResponseGeneric<Company>> GetCompanyAsync(string cnpj);
 }

@@ -18,7 +18,7 @@ namespace depsmvp.insfrastructure.ExternalServices
             _brasilApiUrl = configuration["ExternalServices:BrasilApi:Url"];
         }
 
-        public async Task<ResponseGeneric<Company>> GetCompany(string cnpj)
+        public async Task<ResponseGeneric<Company>> GetCompanyAsync(string cnpj)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"{_brasilApiUrl}{cnpj}");
 
