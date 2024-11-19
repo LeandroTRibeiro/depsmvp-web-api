@@ -13,6 +13,7 @@
         "packagesPath": "/home/leandro/.nuget/packages/",
         "outputPath": "/home/leandro/depsmvp-web-api/depsmvp-web-api/obj/",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "/home/leandro/.nuget/NuGet/NuGet.Config"
         ],
@@ -88,6 +89,7 @@
         "packagesPath": "/home/leandro/.nuget/packages/",
         "outputPath": "/home/leandro/depsmvp-web-api/depsmvp.application/obj/",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "/home/leandro/.nuget/NuGet/NuGet.Config"
         ],
@@ -151,6 +153,7 @@
         "packagesPath": "/home/leandro/.nuget/packages/",
         "outputPath": "/home/leandro/depsmvp-web-api/depsmvp.domain/obj/",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "/home/leandro/.nuget/NuGet/NuGet.Config"
         ],
@@ -204,6 +207,7 @@
         "packagesPath": "/home/leandro/.nuget/packages/",
         "outputPath": "/home/leandro/depsmvp-web-api/depsmvp.insfrastructure/obj/",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "/home/leandro/.nuget/NuGet/NuGet.Config"
         ],

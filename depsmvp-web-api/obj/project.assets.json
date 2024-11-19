@@ -1405,6 +1405,7 @@
       "packagesPath": "/home/leandro/.nuget/packages/",
       "outputPath": "/home/leandro/depsmvp-web-api/depsmvp-web-api/obj/",
       "projectStyle": "PackageReference",
+      "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
         "/home/leandro/.nuget/NuGet/NuGet.Config"
       ],
