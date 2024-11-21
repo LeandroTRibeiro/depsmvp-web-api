@@ -17,10 +17,6 @@ logs/
 *.bak
 *.tmp
 
-# Sensitive configuration
-appsettings.json
-!appsettings.example.json
-
 # Migrations (opcional)
 **/Migrations/
 

@@ -10,27 +10,31 @@ namespace depsmvp.insfrastructure.ExternalServices;
 public class PortalDaTrasparenciaApi : IPortalDaTrasparenciaApi
 {
     private readonly HttpClient _httpClient;
-    private readonly IConfiguration _configuration;
 
     public PortalDaTrasparenciaApi(HttpClient httpClient, IConfiguration configuration)
     {
         _httpClient = httpClient;
-        _configuration = configuration;
     }
 
     public async Task<ResponseGeneric<List<Pep>>> GetPepAsync(string cpf, DateTime referenceDate, int interval)
     {
-        var baseUrl = _configuration["ExternalServices:PortalDaTrasparenciaApi:BaseUrl"];
-        var endpoint = _configuration["ExternalServices:PortalDaTrasparenciaApi:EndPoints:Peps"];
-        var apiKeyName = _configuration["ExternalServices:PortalDaTrasparenciaApi:Header:Authorization:Name"];
-        var apiKeyValue = _configuration["ExternalServices:PortalDaTrasparenciaApi:Header:Authorization:Value"];
+        var baseUrl = Environment.GetEnvironmentVariable("PORTAL_TRANSPARENCIA_BASE_URL");
+        var endpoint = Environment.GetEnvironmentVariable("PORTAL_TRANSPARENCIA_ENDPOINT_PEPS");
+        var apiKeyName = Environment.GetEnvironmentVariable("PORTAL_TRANSPARENCIA_API_KEY_NAME");
+        var apiKeyValue = Environment.GetEnvironmentVariable("PORTAL_TRANSPARENCIA_API_KEY");
+        
+        if (string.IsNullOrEmpty(baseUrl) || string.IsNullOrEmpty(endpoint) || 
+            string.IsNullOrEmpty(apiKeyName) || string.IsNullOrEmpty(apiKeyValue))
+        {
+            throw new Exception("Variáveis de ambiente do Portal da Transparência não estão configuradas corretamente.");
+        }
 
         var startUntil = referenceDate.ToString("dd/MM/yyyy");
         var startFrom = referenceDate.AddDays(-interval).ToString("dd/MM/yyyy");
 
         var requestUrl =
             $"{baseUrl}{endpoint}{cpf}&dataInicioExercicioDe={startFrom}&dataInicioExercicioAte={startUntil}";
-
+        
         var request = new HttpRequestMessage(HttpMethod.Get, requestUrl);
         request.Headers.Add(apiKeyName, apiKeyValue);
 

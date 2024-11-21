@@ -15,7 +15,12 @@ namespace depsmvp.insfrastructure.ExternalServices
         public BrasilApi(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
-            _brasilApiUrl = configuration["ExternalServices:BrasilApi:Url"];
+            _brasilApiUrl = Environment.GetEnvironmentVariable("BRASIL_API_URL");
+            
+            if (string.IsNullOrEmpty(_brasilApiUrl))
+            {
+                throw new Exception("A variável de ambiente BRASIL_API_URL não está configurada.");
+            }
         }
 
         public async Task<ResponseGeneric<Company>> GetCompanyAsync(string cnpj)
