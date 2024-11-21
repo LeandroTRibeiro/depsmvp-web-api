@@ -17,13 +17,13 @@ public class CompanyServices : ICompanyServices
     private readonly ICompanyConsultRepository _companyConsultRepository;
 
     public CompanyServices(
-        IMapper mapper, 
-        IBrasilApi brasilApi, 
-        ICompanyRepository companyRepository, 
+        IMapper mapper,
+        IBrasilApi brasilApi,
+        ICompanyRepository companyRepository,
         IConsultRepository consultationRepository,
         IUserRepository userRepository,
         ICompanyConsultRepository companyConsultRepository
-        )
+    )
     {
         _mapper = mapper;
         _brasilApi = brasilApi;
@@ -32,19 +32,19 @@ public class CompanyServices : ICompanyServices
         _userRepository = userRepository;
         _companyConsultRepository = companyConsultRepository;
     }
-    
-    
+
+
     public async Task<ResponseGeneric<CompanyResponse>> GetCompanyAsync(
-            string cnpj,
-            string referenceDate,
-            int interval
-        )
+        string cnpj,
+        string referenceDate,
+        int interval
+    )
     {
         const int userId = 1;
         var user = await _userRepository.GetUserByIdAsync(1);
         DateTime parsedDate = DateTime.ParseExact(referenceDate, "dd/MM/yyyy", null);
 
-    
+
         var consultation = new Consultation
         {
             User = user,
@@ -54,11 +54,11 @@ public class CompanyServices : ICompanyServices
             ConsultationDateReference = parsedDate.ToUniversalTime(),
             ConsultationInterval = interval,
         };
-        
+
         await _consultationRepository.AddConsultAsync(consultation);
 
         CompanyConsult companyConsult = new CompanyConsult();
-        
+
         var company = await _companyRepository.GetCompanyByCnpjAsync(cnpj);
 
         if (company == null)
@@ -67,39 +67,37 @@ public class CompanyServices : ICompanyServices
 
             if (newCompany.HttpCode == HttpStatusCode.OK && newCompany.ReturnData != null)
             {
-                
                 await _companyRepository.AddCompanyAsync(newCompany.ReturnData);
-                
+
                 companyConsult.ConsultationId = consultation.Id;
                 companyConsult.CompanyId = newCompany.ReturnData.Id;
                 companyConsult.AssociatedDate = DateTime.UtcNow;
-                
-                await _companyConsultRepository.AddAsync(companyConsult);
 
+                await _companyConsultRepository.AddAsync(companyConsult);
             }
-            
+
             return _mapper.Map<ResponseGeneric<CompanyResponse>>(newCompany);
         }
-        
+
         companyConsult.ConsultationId = consultation.Id;
         companyConsult.CompanyId = company.Id;
         companyConsult.AssociatedDate = DateTime.UtcNow;
-        
+
         await _companyConsultRepository.AddAsync(companyConsult);
-        
+
         return _mapper.Map<ResponseGeneric<CompanyResponse>>(
-                new ResponseGeneric<Company>()
-                {
-                    HttpCode = HttpStatusCode.OK,
-                    ReturnData = company
-                }
-            );
+            new ResponseGeneric<Company>()
+            {
+                HttpCode = HttpStatusCode.OK,
+                ReturnData = company
+            }
+        );
     }
 
     public async Task<ResponseGeneric<CompanyResponse>> GetCompanyByConsultationtIdAsync(int consultationId)
     {
         var company = await _companyConsultRepository.GetCompanyByConsultationtIdAsync(consultationId);
-        
+
         return _mapper.Map<ResponseGeneric<CompanyResponse>>(
             new ResponseGeneric<Company>()
             {
