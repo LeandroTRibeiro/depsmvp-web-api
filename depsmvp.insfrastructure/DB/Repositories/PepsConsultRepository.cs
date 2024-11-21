@@ -26,7 +26,7 @@ public class PepsConsultRepository : IPepsConsultRepository
             .Include(pc => pc.Pep)
             .Select(pc => pc.Pep)
             .ToListAsync();
-        
+
         return peps;
-    } 
+    }
 }

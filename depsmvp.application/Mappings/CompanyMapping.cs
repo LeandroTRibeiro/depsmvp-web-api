@@ -11,10 +11,10 @@ public class CompanyMapping : Profile
         CreateMap(typeof(ResponseGeneric<>), typeof(ResponseGeneric<>));
         CreateMap<CompanyResponse, Company>();
         CreateMap<Company, CompanyResponse>();
-        
+
         CreateMap<CnaesSecundario, CnaesSecundarioResponse>();
         CreateMap<CnaesSecundarioResponse, CnaesSecundario>();
-        
+
         CreateMap<Qsa, QsaResponse>();
         CreateMap<QsaResponse, Qsa>();
     }

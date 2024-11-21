@@ -5,7 +5,6 @@ namespace DepsMvp.Application.Services;
 public interface ICompanyServices
 {
     Task<ResponseGeneric<CompanyResponse>> GetCompanyAsync(string cnpj, string referenceDate, int interval);
-    
-    Task<ResponseGeneric<CompanyResponse>> GetCompanyByConsultationtIdAsync(int consultationId);
 
+    Task<ResponseGeneric<CompanyResponse>> GetCompanyByConsultationtIdAsync(int consultationId);
 }

@@ -25,6 +25,9 @@ public class CompanyConsultRepository : ICompanyConsultRepository
         return await _dbContext.CompanyConsults
             .Where(cp => cp.ConsultationId == consultationId)
             .Include(cp => cp.Company)
+            .ThenInclude(c => c.Qsa)
+            .Include(cp => cp.Company)
+            .ThenInclude(c => c.CnaesSecundarios)
             .Select(cp => cp.Company)
             .SingleOrDefaultAsync() ?? new Company();
     }

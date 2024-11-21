@@ -12,10 +12,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
-        build => 
+        build =>
             build.AllowAnyOrigin()
-                 .AllowAnyHeader()
-                 .AllowAnyMethod());
+                .AllowAnyHeader()
+                .AllowAnyMethod());
 });
 
 builder.Services.AddControllers();

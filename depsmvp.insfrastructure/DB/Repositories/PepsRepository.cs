@@ -12,15 +12,15 @@ public class PepsRepository : IPepsRepository
     {
         _dbContext = dbContext;
     }
-    
+
     public async Task AddRangePepsAsync(List<Pep> peps, string cpf)
     {
         var pepsToAdd = new List<Pep>();
-    
+
         foreach (var pep in peps)
         {
             var existingPep = await _dbContext.Peps
-                .FirstOrDefaultAsync(p => 
+                .FirstOrDefaultAsync(p =>
                     p.Cpf == pep.Cpf &&
                     p.Nome == pep.Nome &&
                     p.SiglaFuncao == pep.SiglaFuncao &&
@@ -31,7 +31,7 @@ public class PepsRepository : IPepsRepository
                     p.DtInicioExercicio == pep.DtInicioExercicio &&
                     p.DtFimExercicio == pep.DtFimExercicio &&
                     p.DtFimCarencia == pep.DtFimCarencia);
-    
+
             if (existingPep == null)
             {
                 pep.SearchDate = DateTime.UtcNow;
@@ -39,22 +39,22 @@ public class PepsRepository : IPepsRepository
                 pepsToAdd.Add(pep);
             }
         }
-        
+
         if (pepsToAdd.Any())
         {
             await _dbContext.Peps.AddRangeAsync(pepsToAdd);
             await _dbContext.SaveChangesAsync();
         }
     }
-    
+
     public async Task<List<Pep>> GetAllPepsByCpfAsync(string cpf)
     {
         var peps = await _dbContext.Peps
-            .Where(p => 
+            .Where(p =>
                 p.Cpf!.Equals(cpf) &&
                 p.SearchDate.Date.Date.Equals(DateTime.UtcNow.Date))
             .ToListAsync();
-        
+
         return peps;
     }
 }

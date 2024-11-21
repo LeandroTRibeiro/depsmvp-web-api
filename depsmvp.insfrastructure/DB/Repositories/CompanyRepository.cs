@@ -13,21 +13,21 @@ public class CompanyRepository : ICompanyRepository
     {
         _dbContext = dbContext;
     }
-    
+
     public async Task AddCompanyAsync(Company company)
     {
         company.SearchDate = DateTime.UtcNow;
-        
+
         var existingCompany = await _dbContext.Companies
             .FirstOrDefaultAsync(
-                c => c.Cnpj!.Equals(company.Cnpj) && 
+                c => c.Cnpj!.Equals(company.Cnpj) &&
                      c.SearchDate.Date.Equals(company.SearchDate.Date));
 
         if (existingCompany != null)
         {
             return;
         }
-        
+
         await _dbContext.Companies.AddAsync(company);
         await _dbContext.SaveChangesAsync();
     }
@@ -38,10 +38,10 @@ public class CompanyRepository : ICompanyRepository
             .Include(c => c.CnaesSecundarios)
             .Include(c => c.Qsa)
             .FirstOrDefaultAsync(
-                c => c.Cnpj!.Equals(cnpj) && 
+                c => c.Cnpj!.Equals(cnpj) &&
                      c.SearchDate.Date.Date.Equals(DateTime.UtcNow.Date
                      ));
-        
+
         return company!;
     }
 }

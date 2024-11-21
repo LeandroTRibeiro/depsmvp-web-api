@@ -18,11 +18,10 @@ public class ConsultationRepository : IConsultRepository
         await _context.Consultations.AddAsync(consultation);
         await _context.SaveChangesAsync();
     }
-    
+
     public async Task<int> GetTotalConsultsCountAsync()
     {
         return await _context.Consultations.CountAsync();
-        
     }
 
     public async Task<List<Consultation>> GetAllConsultsAsync(int? limit = null, int pageNumber = 1, int pageSize = 10)
@@ -41,5 +40,4 @@ public class ConsultationRepository : IConsultRepository
 
         return await query.ToListAsync();
     }
-
 }

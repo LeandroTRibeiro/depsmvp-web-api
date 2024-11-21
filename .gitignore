@@ -1,10 +1,29 @@
+# Solution file
 /depsmvp-web-api.sln
 
-# Ignore Rider project-specific files
+# Rider project-specific files
 *.rider
 .idea/
 
-# Ignore obj directory (build artifacts)
+# Build artifacts
 **/obj/
+**/bin/
 
+# Logs
+*.log
+logs/
+
+# User-specific files
+*.bak
+*.tmp
+
+# Sensitive configuration
 appsettings.json
+!appsettings.example.json
+
+# Migrations (opcional)
+**/Migrations/
+
+# OS-specific files
+.DS_Store
+Thumbs.db

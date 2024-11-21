@@ -22,10 +22,13 @@ namespace depsmvp.insfrastructure.ExternalServices
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"{_brasilApiUrl}{cnpj}");
 
+            request.Headers.Add("User-Agent", "MvpDeps/1.0");
+
             var response = new ResponseGeneric<Company>();
 
             var responseBrasilApi = await _httpClient.SendAsync(request);
             var contetResponse = await responseBrasilApi.Content.ReadAsStringAsync();
+
             var objResponse = JsonSerializer.Deserialize<Company>(contetResponse);
 
             if (responseBrasilApi.IsSuccessStatusCode)

@@ -76,5 +76,5 @@ public class CompanyResponse
 
     public List<CnaesSecundarioResponse>? CnaesSecundarios { get; set; }
 
-    public List<QsaResponse>? Qsa { get; set; } 
+    public List<QsaResponse>? Qsa { get; set; }
 }

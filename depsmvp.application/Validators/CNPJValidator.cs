@@ -21,7 +21,7 @@ public static class CNPJValidator
     private static int CalculateVerifyingDigit(string cnpj)
     {
         int[] weight = { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
-        if (cnpj.Length == 13) 
+        if (cnpj.Length == 13)
         {
             weight = new int[] { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
         }

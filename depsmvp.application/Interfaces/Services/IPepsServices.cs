@@ -5,11 +5,10 @@ namespace depsmvp.application.Interfaces.Services;
 public interface IPepsServices
 {
     Task<ResponseGeneric<List<PepsResponse>>> GetPepsByCpfAsync(
-            string cpf, 
-            string referenceDate, 
-            int interval
-        );
+        string cpf,
+        string referenceDate,
+        int interval
+    );
 
     Task<ResponseGeneric<List<PepsResponse>>> GetPepsByConsultationtIdAsync(int consultationId);
-
 }

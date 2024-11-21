@@ -39,5 +39,4 @@ public static class CPFValidator
 
         return resultado == int.Parse(cpf[posicao].ToString());
     }
-
 }

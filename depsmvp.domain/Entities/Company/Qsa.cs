@@ -5,12 +5,11 @@ namespace depsmvp.domain.Entities.Company;
 public class Qsa
 {
     public int Id { get; set; }
-    
+
     [JsonPropertyName("identificador_de_socio")]
     public int? IdentificadorDeSocio { get; set; }
 
-    [JsonPropertyName("nome_socio")]
-    public string? NomeSocio { get; set; }
+    [JsonPropertyName("nome_socio")] public string? NomeSocio { get; set; }
 
     [JsonPropertyName("cnpj_cpf_do_socio")]
     public string? CnpjCpfDoSocio { get; set; }
@@ -32,7 +31,7 @@ public class Qsa
 
     [JsonPropertyName("codigo_qualificacao_representante_legal")]
     public int? CodigoQualificacaoRepresentanteLegal { get; set; }
-    
+
     public int CompanyId { get; set; }
     public Company? Company { get; set; }
 }
