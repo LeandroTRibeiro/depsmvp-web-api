@@ -12,7 +12,7 @@ public class ConsultationServices : IConsultServices
     {
         _consultationRepository = consultationRepository;
     }
-    
+
     public async Task<PagedResponse<List<Consultation>>> GetAllConsultsAsync(int? limit, int pageNumber, int pageSize)
     {
         var totalItems = await _consultationRepository.GetTotalConsultsCountAsync();
