@@ -24,7 +24,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseNpgsql(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
 });
 
 builder.Services.AddScoped<IConsultRepository, ConsultationRepository>();
