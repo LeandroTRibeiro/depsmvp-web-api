@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace depsmvp.application.Requests;
 
-public class PostPepsByCpfRequest
+public class GetPepsByCpfRequest
 {
     [Required]
     public string Cpf { get; set; }
