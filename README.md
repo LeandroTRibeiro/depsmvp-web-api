@@ -8,6 +8,48 @@ API desenvolvida para consumir e integrar dados de múltiplas APIs externas, oti
 
 Antes de executar o projeto, certifique-se de que o **PostgreSQL** está instalado e configurado na sua máquina. O banco de dados é necessário para rodar as migrações e armazenar os dados da aplicação.
 
+## Configuração do `appsettings.json` 🛠️
+
+Antes de iniciar o projeto, você precisa criar um arquivo chamado `appsettings.json` na raiz do seu projeto. Este arquivo deve conter as configurações de conexão com o banco de dados e serviços externos. Aqui está um exemplo do conteúdo esperado para o arquivo:
+
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=localhost;Port=5433;Database=DepsMvpV1;Username=root;Password=postgres"
+  },
+  "ExternalServices": {
+    "BrasilApi": {
+      "Url": "https://brasilapi.com.br/api/cnpj/v1/"
+    },
+    "PortalDaTrasparenciaApi": {
+      "BaseUrl": "https://api.portaldatransparencia.gov.br/api-de-dados",
+      "EndPoints": {
+        "Peps": "/peps?cpf="
+      },
+      "Header": {
+        "Authorization": {
+          "Name": "chave-api-dados",
+          "Value": "sua_chave_aqui"
+        }
+      }
+    }
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}
+```
+
+### ⚠️ Importante:
+1. Substitua os valores de `DefaultConnection` com os dados do seu banco de dados PostgreSQL.
+2. Atualize o valor de `chave-api-dados` em `PortalDaTrasparenciaApi` com sua chave de API.
+
+Certifique-se de que o arquivo está devidamente configurado antes de executar o projeto.
+
 ## Passos para rodar o projeto 📝
 
 ### 1. Executar as migrações ⚙️
