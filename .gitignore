@@ -27,3 +27,11 @@ appsettings.json
 # OS-specific files
 .DS_Store
 Thumbs.db
+# Build artifacts
+bin/
+obj/
+*.dll
+*.pdb
+
+# Rider project files
+*.rider.*
